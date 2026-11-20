@@ -3,70 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mijn Eerste Website</title>
+  <title>Portfolio & Datapuntenlog</title>
   <style>
-    /* Hier bepaal je de stijl en kleuren van je website */
+    /* Basale stijl voor de hele pagina */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
+      background-color: #f4f6f9;
+      color: #222;
       margin: 0;
       padding: 0;
+    }
+
+    /* Hoofdmenu bovenin */
+    nav {
+      background-color: #1e293b;
+      padding: 15px 30px;
       display: flex;
-      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
       align-items: center;
-      min-height: 100vh;
     }
 
-    .kaart {
+    nav .logo {
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 20px;
+    }
+
+    nav button {
+      background-color: transparent;
+      color: #cbd5e1;
+      border: 1px solid transparent;
+      padding: 8px 16px;
+      font-size: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    nav button:hover, nav button.actief {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    /* Inhoudsblok */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .sectie {
+      display: none;
       background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      text-align: center;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
-    h1 {
-      color: #2563eb;
+    .sectie.actief {
+      display: block;
+    }
+
+    h1, h2 {
+      color: #1e293b;
       margin-top: 0;
     }
 
-    p {
-      line-height: 1.6;
+    /* Tabellen */
+    .tabel-wrapper {
+      overflow-x: auto;
     }
 
-    button {
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin-top: 15px;
+      font-size: 14px;
     }
 
-    button:hover {
-      background-color: #1d4ed8;
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Badges voor stoplicht en status */
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .GROEN { background-color: #dcfce7; color: #166534; }
+    .ORANJE { background-color: #ffedd5; color: #9a3412; }
+    .ROOD { background-color: #fee2e2; color: #991b1b; }
+    .Uitgewerkt { background-color: #dbeafe; color: #1e40af; }
+    .Genoteerd { background-color: #f1f5f9; color: #475569; }
+
+    /* Filterbalk */
+    .filter-balk {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 14px;
+    }
+
+    /* Kaarten voor leerdoelen */
+    .leerdoel-kaart {
+      border: 1px solid #e2e8f0;
+      border-left: 5px solid #2563eb;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      background-color: #f8fafc;
     }
   </style>
 </head>
 <body>
 
-  <!-- Hier staat de zichtbare inhoud van je pagina -->
-  <div class="kaart">
-    <h1>Welkom op mijn website!</h1>
-    <p>Dit is mijn allereerste pagina, gehost via GitHub Pages. Alles werkt!</p>
-    <button onclick="groet()">Klik hier</button>
-    <p id="bericht" style="font-weight: bold; color: #16a34a;"></p>
+  <!-- HOOFDMENU -->
+  <nav>
+    <div class="logo">Mijn Portfolio</div>
+    <button class="actief" onclick="toonSectie('home', this)">Home</button>
+    <button onclick="toonSectie('logboek', this)">Datapunten Logboek</button>
+    <button onclick="toonSectie('leerdoelen', this)">Persoonlijke Leerdoelen</button>
+    <button onclick="toonSectie('dekking', this)">Dekking Minor-leerdoelen</button>
+  </nav>
+
+  <div class="container">
+
+    <!-- 1. HOME -->
+    <div id="home" class="sectie actief">
+      <h1>Welkom op mijn portfolio-website</h1>
+      <p><strong>Minor:</strong> Digitalisering in de Gebouwde Omgeving</p>
+      <p>Via het hoofdmenu hierboven kun je mijn voortgang bekijken uit het datapuntenlogboek:</p>
+      <ul>
+        <li><strong>Datapunten Logboek:</strong> Alle wekelijkse activiteiten, bewijzen en status per track (K&V, Leerplek, Project).</li>
+        <li><strong>Persoonlijke Leerdoelen:</strong> Mijn persoonlijke doelen (PD1 t/m PD3), startsituatie en bewijsplan.</li>
+        <li><strong>Dekking Minor-leerdoelen:</strong> Overzicht per leerdoel met stoplichtstatus (Groen, Oranje, Rood).</li>
+      </ul>
+    </div>
+
+    <!-- 2. DATAPUNTEN LOGBOEK -->
+    <div id="logboek" class="sectie">
+      <h2>Datapunten Logboek (Week 1 t/m 9)</h2>
+      
+      <div class="filter-balk">
+        <label for="trackFilter"><strong>Filter op Track:</strong></label>
+        <select id="trackFilter" onchange="filterLog()">
+          <option value="ALLE">Alle tracks</option>
+          <option value="K&V">K&V</option>
+          <option value="Project">Project</option>
+          <option value="Leerplek">Leerplek</option>
+        </select>
+
+        <label for="statusFilter"><strong>Filter op Status:</strong></label>
+        <select id="statusFilter" onchange="filterLog()">
+          <option value="ALLE">Alle statussen</option>
+          <option value="Uitgewerkt">Uitgewerkt</option>
+          <option value="Genoteerd">Genoteerd</option>
+        </select>
+      </div>
+
+      <div class="tabel-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Wk</th>
+              <th>Track</th>
+              <th>Activiteit (wat deed ik concreet?)</th>
+              <th>Leerdoel</th>
+              <th>PD</th>
+              <th>Waarom is dit bewijs?</th>
+              <th>Bewijsstuk</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="log-tabel-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. PERSOONLIJKE LEERDOELEN -->
+    <div id="leerdoelen" class="sectie">
+      <h2>Persoonlijke Leerdoelen</h2>
+      <div id="leerdoelen-container"></div>
+    </div>
+
+    <!-- 4. DEKKING -->
+    <div id="dekking" class="sectie">
+      <h2>Dekking Minor-leerdoelen</h2>
+      <p><em>Doel eind minor: elk leerdoel GROEN met minimaal 2 uitgewerkte bewijsstukken.</em></p>
+      <div class="tabel-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Leerdoel</th>
+              <th>Omschrijving</th>
+              <th>Totaal datapunten</th>
+              <th>Uitgewerkt / portfolio</th>
+              <th>Signaal</th>
+            </tr>
+          </thead>
+          <tbody id="dekking-tabel-body"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Een klein stukje interactie -->
   <script>
-    function groet() {
-      document.getElementById("bericht").innerText = "Je website is succesvol actief! 🎉";
+    // Wisselen tussen pagina's in het hoofdmenu
+    function toonSectie(id, knop) {
+      document.querySelectorAll('.sectie').forEach(s => s.classList.remove('actief'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('actief'));
+      document.getElementById(id).classList.add('actief');
+      knop.classList.add('actief');
     }
+
+    // DATA UIT EXCEL: LOG
+    const logData = [
+      { datum: "31-08-2026", wk: 1, track: "K&V", activiteit: "Eerste les in Grasshopper. Basis van programma geleerd en samengewerkt aan script.", leerdoel: "2.1, 3.2", pd: "PD1", waarom: "Begin gemaakt aan Grasshopper skills. Vaardigheden verbeterd omdat dit de eerste keer was dat ik het programma heb gebruikt.", bewijs: "Resultaat afbeelding", status: "Genoteerd" },
+      { datum: "01-09-2026", wk: 1, track: "K&V", activiteit: "Cobot bestuurd", leerdoel: "3.3", pd: "-", waarom: "Kennis gemaakt met nieuwe digitale tool", bewijs: "-", status: "-" },
+      { datum: "02-09-2026", wk: 1, track: "K&V", activiteit: "Gewerkt met Ollama op PC", leerdoel: "3.3", pd: "-", waarom: "Kennis gemaakt met nieuwe digitale tool", bewijs: "-", status: "-" },
+      { datum: "03-09-2026", wk: 1, track: "K&V", activiteit: "Eerste leerdoelen opgesteld en datapunten gemaakt", leerdoel: "1.1", pd: "-", waarom: "Laat zien dat ik leerdoelen kan opstellen en bij kan sturen bij reflectie.", bewijs: "Ingeleverd document", status: "Genoteerd" },
+      { datum: "09-09-2026", wk: 2, track: "Leerplek", activiteit: "Actief meegedaan aan de bedrijven speeddate", leerdoel: "2.3", pd: "PD3", waarom: "Gebouwd aan mijn netwerk door actief verschillende bedrijven gesproken te hebben.", bewijs: "Afbeelding", status: "Genoteerd" },
+      { datum: "10-09-2026", wk: 2, track: "Project", activiteit: "Gestart met project 1", leerdoel: "-", pd: "-", waarom: "Geen bewijs, gebeurtenis", bewijs: "-", status: "-" },
+      { datum: "11-09-2026", wk: 2, track: "K&V", activiteit: "Feedback verzameld op leerdoelen", leerdoel: "3.1", pd: "-", waarom: "Laat zien dat ik bij kan sturen op mijn gemaakte leerdoelen", bewijs: "Feedback in Document", status: "Genoteerd" },
+      { datum: "18-09-2026", wk: 3, track: "-", activiteit: "Bezoek aan museum Beeld en Geluid.", leerdoel: "-", pd: "-", waarom: "Geen bewijs, gebeurtenis", bewijs: "Afbeelding", status: "-" },
+      { datum: "21-09-2026", wk: 4, track: "K&V", activiteit: "Bij de Grasshopper workshop mijn vaardigheden kunnen verbeteren. Zo ver mogelijk Brienenoordbrug gemodelleerd. Geleerd hoe aantal basis Grasshopper nodes werken.", leerdoel: "2.1, 3.2", pd: "PD1", waarom: "Kreeg echt voortgang in Grasshopper skills. Kon onderdelen uitleggen aan andere studenten.", bewijs: "Resultaat afbeelding", status: "Uitgewerkt" },
+      { datum: "24-09-2026", wk: 4, track: "Project", activiteit: "Tussenpresentatie gehouden project 1.", leerdoel: "2.2", pd: "PD3", waarom: "Laat zien dat ik de resultaten van het project kan communiceren", bewijs: "Powerpoint", status: "Genoteerd" },
+      { datum: "25-09-2026", wk: 4, track: "K&V", activiteit: "Bedrijfsbezoek TheNewMakers", leerdoel: "-", pd: "-", waarom: "Geen bewijs, gebeurtenis", bewijs: "Afbeelding van rondleiding", status: "-" },
+      { datum: "30-09-2026", wk: 5, track: "Project", activiteit: "Begin gemaakt aan een 3D-object in een AR-bril proberen te krijgen", leerdoel: "1.3", pd: "PD2", waarom: "Laat zien dat ik zelfstandig een nieuwe tool kan gebruiken en aan kan werken.", bewijs: "Afbeelding", status: "Genoteerd" },
+      { datum: "01-10-2026", wk: 5, track: "Leerplek", activiteit: "Introductiedag bij leerplek Broekbakema, kennis gemaakt met collega's, rondleiding gehad, start gemaakt.", leerdoel: "2.3", pd: "PD3", waarom: "Laat zien dat ik in een professionele situatie kan kennismaken en functioneren.", bewijs: "Afbeelding van rondleiding", status: "Genoteerd" },
+      { datum: "06-10-2026", wk: 6, track: "Leerplek", activiteit: "Onderzoek gedaan naar AI, concrete doelstellingen gemaakt", leerdoel: "1.1, 1.2", pd: "-", waarom: "Laat zien dat ik zelfstandig en in een team concrete doelstellingen en een planning kan maken voor een onderzoek", bewijs: "Afbeelding van planning en doelstellingen", status: "Genoteerd" },
+      { datum: "09-10-2026", wk: 6, track: "K&V", activiteit: "ArcGIS workshop", leerdoel: "-", pd: "-", waarom: "Geen bewijs, gebeurtenis", bewijs: "-", status: "-" },
+      { datum: "15-10-2026", wk: 7, track: "Project", activiteit: "Visualisatie afgerond in AR-bril", leerdoel: "1.3", pd: "PD2", waarom: "Laat zien dat ik zelfstandig een nieuwe tool kan gebruiken en aan kan werken.", bewijs: "Afbeelding van resultaat", status: "Genoteerd" },
+      { datum: "16-10-2026", wk: 7, track: "Project", activiteit: "Presentatie project", leerdoel: "4.1", pd: "PD2", waarom: "Laat zien dat ik bevindingen kan delen.", bewijs: "Document van leerpunten en activiteiten", status: "Genoteerd" },
+      { datum: "20-10-2026", wk: 8, track: "Leerplek", activiteit: "Handleiding gemaakt voor bedrijf hoe programma te installeren, aan de hand van opgedane kennis", leerdoel: "2.3", pd: "-", waarom: "Laat zien dat ik informatie die ik heb vergaard ook duidelijk kan delen met betrokkenen.", bewijs: "Document", status: "Uitgewerkt" },
+      { datum: "29-10-2026", wk: 9, track: "Project", activiteit: "Begonnen met eerste stappen maken 3D-printen. Geleerd hoe je een 3D-model kan omzetten om uit te kunnen printen en hoe de 3D-printer werkt.", leerdoel: "1.3", pd: "-", waarom: "Laat zien dat ik zelfstandig een nieuwe tool kan gebruiken en aan kan werken.", bewijs: "-", status: "Uitgewerkt" }
+    ];
+
+    // DATA UIT EXCEL: PERSOONLIJKE LEERDOELEN
+    const leerdoelenData = [
+      { nr: "PD1", doel: "Ik kan een werkend parametrisch model zelfstandig opzetten in Grasshopper en uitleggen hoe de code in elkaar zit en waarom het werkt.", minor: "1.2, 2.2, 3.2", start: "Ik heb Grasshopper eenmalig gebruikt bij een les in week 1.", gewenst: "Een werkend en bruikbaar parametrisch model. Ik kan uitleggen hoe de code in elkaar zit en waarom het werkt.", plan: "Een model dat tenminste drie variabelen kan verwerken in het ontwerp. Bestanden van het model en code.", actie: "Eerste tutorials/filmpjes volgen. Basiskennis krijgen. In het eerste project er aan werken." },
+      { nr: "PD2", doel: "Ik kan een visualisatie inladen, projecteren en aanpassen met behulp van een AR-bril.", minor: "1.3, 1.4, 3.3", start: "Ik heb nog nooit een AR-bril gebruikt of aan de software gewerkt.", gewenst: "Een 3D-model geprojecteerd in AR en op een manier iets bij het gebruik van de bril in het model aangepast. De visualisatie gebruiksgemakkelijk maken voor een stakeholder.", plan: "Foto's/videos van het gebruik. Bestanden van het 3D-model en code.", actie: "De eerste weken eens de bril gebruiken en leren welke mogelijkheden er zijn. In het project in week 4 hier aan werken." },
+      { nr: "PD3", doel: "Ik kan een actieve professionele houding aannemen m.b.t. skills zoals presenteren en communiceren.", minor: "1.1, 2.1, 2.3, 3.1, 4.1", start: "Ik stel mij afwachtend op. Communiceren en presenteren zijn een van mijn zwakste punten.", gewenst: "Ik neem zelfstandig het initiatief. Actief bezig in projectgroep. Presenteren waar mogelijk.", plan: "Feedback en reflectie.", actie: "Mijn houding in de projectgroep aanpassen." }
+    ];
+
+    // DATA UIT EXCEL: DEKKING
+    const dekkingData = [
+      { code: "1.1", omschrijving: "Formuleert relevante digitale onderzoek-/ontwerpvragen en kiest passende methoden", totaal: 2, uitgewerkt: 0, signaal: "ORANJE" },
+      { code: "1.2", omschrijving: "Verzamelt, analyseert en interpreteert data kritisch", totaal: 1, uitgewerkt: 0, signaal: "ORANJE" },
+      { code: "1.3", omschrijving: "Integreert en prototypeert digitale tools/technieken in innovatieve oplossingen", totaal: 3, uitgewerkt: 1, signaal: "GROEN" },
+      { code: "1.4", omschrijving: "Reflecteert kritisch op proces en valideert impact met stakeholders", totaal: 0, uitgewerkt: 0, signaal: "ROOD" },
+      { code: "2.1", omschrijving: "Werkt effectief samen in multidisciplinaire teams met digitale middelen", totaal: 2, uitgewerkt: 1, signaal: "GROEN" },
+      { code: "2.2", omschrijving: "Communiceert bevindingen helder, visueel en doelgroepgericht", totaal: 1, uitgewerkt: 0, signaal: "ORANJE" },
+      { code: "2.3", omschrijving: "Bouwt en onderhoudt professioneel netwerk, draagt bij aan kennisdeling", totaal: 3, uitgewerkt: 1, signaal: "GROEN" },
+      { code: "3.1", omschrijving: "Stelt meetbare persoonlijke leerdoelen op en stuurt bij op basis van reflectie", totaal: 1, uitgewerkt: 0, signaal: "ORANJE" },
+      { code: "3.2", omschrijving: "Toont zelflerende houding in digitale vakbekwaamheid en softskills", totaal: 2, uitgewerkt: 1, signaal: "GROEN" },
+      { code: "3.3", omschrijving: "Signaleert innovaties en eigent zich zelfstandig nieuwe tools toe", totaal: 2, uitgewerkt: 0, signaal: "ORANJE" },
+      { code: "4.1", omschrijving: "Handelt professioneel (HBO)", totaal: 1, uitgewerkt: 0, signaal: "ORANJE" }
+    ];
+
+    // Vul Logboek tabel
+    function filterLog() {
+      const trackVal = document.getElementById('trackFilter').value;
+      const statusVal = document.getElementById('statusFilter').value;
+      const tbody = document.getElementById('log-tabel-body');
+      tbody.innerHTML = '';
+
+      logData.forEach(item => {
+        if ((trackVal === 'ALLE' || item.track === trackVal) &&
+            (statusVal === 'ALLE' || item.status === statusVal)) {
+          const statusBadge = item.status !== '-' ? `<span class="badge ${item.status}">${item.status}</span>` : '-';
+          tbody.innerHTML += `
+            <tr>
+              <td>${item.datum}</td>
+              <td>${item.wk}</td>
+              <td><strong>${item.track}</strong></td>
+              <td>${item.activiteit}</td>
+              <td>${item.leerdoel}</td>
+              <td>${item.pd}</td>
+              <td>${item.waarom}</td>
+              <td>${item.bewijs}</td>
+              <td>${statusBadge}</td>
+            </tr>
+          `;
+        }
+      });
+    }
+
+    // Vul Persoonlijke Leerdoelen
+    const ldContainer = document.getElementById('leerdoelen-container');
+    leerdoelenData.forEach(ld => {
+      ldContainer.innerHTML += `
+        <div class="leerdoel-kaart">
+          <h3>${ld.nr}: ${ld.doel}</h3>
+          <p><strong>Gekoppeld aan minor-leerdoel(en):</strong> ${ld.minor}</p>
+          <p><strong>Startsituatie:</strong> ${ld.start}</p>
+          <p><strong>Gewenst niveau:</strong> ${ld.gewenst}</p>
+          <p><strong>Bewijsplan:</strong> ${ld.plan}</p>
+          <p><strong>Eerste actie:</strong> ${ld.actie}</p>
+        </div>
+      `;
+    });
+
+    // Vul Dekking tabel
+    const dekkingBody = document.getElementById('dekking-tabel-body');
+    dekkingData.forEach(d => {
+      dekkingBody.innerHTML += `
+        <tr>
+          <td><strong>${d.code}</strong></td>
+          <td>${d.omschrijving}</td>
+          <td>${d.totaal}</td>
+          <td>${d.uitgewerkt}</td>
+          <td><span class="badge ${d.signaal}">${d.signaal}</span></td>
+        </tr>
+      `;
+    });
+
+    // Laad logboek bij openen
+    filterLog();
   </script>
 
 </body>
