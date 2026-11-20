@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mijn Eerste Website</title>
+  <style>
+    /* Hier bepaal je de stijl en kleuren van je website */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .kaart {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-top: 0;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hier staat de zichtbare inhoud van je pagina -->
+  <div class="kaart">
+    <h1>Welkom op mijn website!</h1>
+    <p>Dit is mijn allereerste pagina, gehost via GitHub Pages. Alles werkt!</p>
+    <button onclick="groet()">Klik hier</button>
+    <p id="bericht" style="font-weight: bold; color: #16a34a;"></p>
+  </div>
+
+  <!-- Een klein stukje interactie -->
+  <script>
+    function groet() {
+      document.getElementById("bericht").innerText = "Je website is succesvol actief! 🎉";
+    }
+  </script>
+
+</body>
+</html>
